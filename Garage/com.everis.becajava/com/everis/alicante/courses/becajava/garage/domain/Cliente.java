@@ -1,4 +1,4 @@
-package com.everis.becajava;
+package com.everis.alicante.courses.becajava.garage.domain;
 
 public class Cliente {
 	private String nif;
@@ -22,5 +22,6 @@ public class Cliente {
 	}
 	public void setVehiculo(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
-	}	
+	}
+
 }

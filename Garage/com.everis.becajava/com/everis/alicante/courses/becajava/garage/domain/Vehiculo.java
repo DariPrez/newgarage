@@ -1,4 +1,4 @@
-package com.everis.becajava;
+package com.everis.alicante.courses.becajava.garage.domain;
 
 public class Vehiculo {
 	private String plate;
@@ -10,4 +10,5 @@ public class Vehiculo {
 	public void setPlate(String plate) {
 		this.plate = plate;
 	}
+	
 }
