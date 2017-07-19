@@ -24,13 +24,13 @@ public class Cliente {
 		this.vehiculo = vehiculo;
 	}
 
-	public String toTxtFile() {
-		String str ="";
-		str=str.concat(nif);
-		str=str.concat(";");
-		str=str.concat(nombreCompleto);
-		str=str.concat(";");
-		str=str.concat(vehiculo.getPlate());
-		return str;
-	}
+//	public String toTxtFile() {
+//		String str ="";
+//		str=str.concat(nif);
+//		str=str.concat(";");
+//		str=str.concat(nombreCompleto);
+//		str=str.concat(";");
+//		str=str.concat(vehiculo.getPlate());
+//		return str;
+//	}
 }

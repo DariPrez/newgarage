@@ -51,10 +51,5 @@ public class PlazaDAOFileImpl implements PlazaDAO{
 		// TODO Auto-generated method stub
 		
 	}
-	
-	public static void main(String[] args) throws IOException {
-		PlazaDAO dao = new PlazaDAOFileImpl();
-		dao.readPlazas();
-	}
 
 }
