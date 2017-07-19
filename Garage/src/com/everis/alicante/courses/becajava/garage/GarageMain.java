@@ -1,8 +1,14 @@
 package com.everis.alicante.courses.becajava.garage;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
+import com.everis.alicante.courses.becajava.garage.controller.ControladorGarageConArrays;
+import com.everis.alicante.courses.becajava.garage.dao.impl.PlazaDAOFileImpl;
+import com.everis.alicante.courses.becajava.garage.dao.interfaces.PlazaDAO;
 import com.everis.alicante.courses.becajava.garage.domain.Garage;
+import com.everis.alicante.courses.becajava.garage.domain.Plaza;
 import com.everis.alicante.courses.becajava.garage.interfaces.ControladorGarage;
 
 public class GarageMain {
@@ -10,7 +16,7 @@ public class GarageMain {
 	static ControladorGarage controlador;
 	static Garage garage;
 	static String SEPARADOR = "*******************************************************************************";
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 		//inicializar los componentes de la aplicación
 		//4 clientes
@@ -22,7 +28,7 @@ public class GarageMain {
 		
 	}
 
-	private static void incializarAplicacion() {
+	private static void incializarAplicacion() throws IOException {
 		System.out.println(SEPARADOR);
 		System.out.println("Bienvenido a el Garage SOLO MIO:\n¿Que desea Hacer?");
 		System.out.println(SEPARADOR);
@@ -76,11 +82,15 @@ public class GarageMain {
 
 	}
 
-	private static void inicializarComponentes() {
+	private static void inicializarComponentes() throws IOException {
 		
+		PlazaDAO plazaDao = new PlazaDAOFileImpl();
 		garage = new Garage();
 		
-//		Plaza[] plazas = new Plaza[30];
+		List<Plaza> plazasTemp = plazaDao.readPlazas();
+		
+		garage.setPlaza(plazasTemp);
+		controlador = new ControladorGarageConArrays();
 //		
 //		for (int i = 0; i < plazas.length; i++) {
 //			Plaza plazaTemp = new  Plaza();

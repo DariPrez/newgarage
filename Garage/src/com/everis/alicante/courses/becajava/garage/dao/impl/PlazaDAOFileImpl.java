@@ -13,9 +13,10 @@ import com.everis.alicante.courses.becajava.garage.domain.Plaza;
 public class PlazaDAOFileImpl implements PlazaDAO{
 
 	@Override
-	public Plaza[] readPlazas() throws IOException {
+	public List<Plaza> readPlazas() throws IOException {
 		
-		List<String> data = new ArrayList<String>();
+		//List<String> data = new ArrayList<String>();
+		List<Plaza> plazas = new ArrayList<Plaza>();
 		String linea;
 		//buscar fichero
 		
@@ -24,10 +25,25 @@ public class PlazaDAOFileImpl implements PlazaDAO{
 		BufferedReader buffer = new BufferedReader(reader);
 		
 		while ((linea=buffer.readLine())!=null) {
-			data.add(linea);
-			System.out.println(linea);
-		}
-		return null;
+			//data.add(linea);
+			
+			if(!linea.contains("NUMERO_PLAZA")) {
+			Plaza plazaTemp = new Plaza();
+			
+			String[] temp = linea.split(";");
+			plazaTemp.setNumeroPlaza(Integer.parseInt(temp[0]));
+			plazaTemp.setPrecio(Double.parseDouble(temp[1]));
+			//plazaTemp.setNumeroPlaza(Integer.parseInt(linea.substring(0,linea.indexOf(";"))));
+//			String tmp= linea.substring(linea.indexOf(";")+1);
+//			plazaTemp.setPrecio(Double.parseDouble(tmp.substring(0,linea.indexOf(";")+1)));
+//			String precio = linea.substring(linea.indexOf(";",1)+1,linea.indexOf(";"));
+//			plazaTemp.setPrecio(Double.parseDouble(precio));
+			
+			plazas.add(plazaTemp);
+			//System.out.println(linea);
+			}}
+		reader.close();
+		return plazas;
 	}
 
 	@Override
