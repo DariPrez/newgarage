@@ -4,26 +4,27 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-import com.everis.alicante.courses.becajava.garage.controller.ControladorGarageConArrays;
+import com.everis.alicante.courses.becajava.garage.controller.ControladorGarageImpl;
+import com.everis.alicante.courses.becajava.garage.dao.impl.ClienteDAOFileImpl;
 import com.everis.alicante.courses.becajava.garage.dao.impl.PlazaDAOFileImpl;
+import com.everis.alicante.courses.becajava.garage.dao.impl.ReservaDAOFileImpl;
+import com.everis.alicante.courses.becajava.garage.dao.interfaces.ClienteDAO;
 import com.everis.alicante.courses.becajava.garage.dao.interfaces.PlazaDAO;
+import com.everis.alicante.courses.becajava.garage.dao.interfaces.ReservaDAO;
 import com.everis.alicante.courses.becajava.garage.domain.Garage;
 import com.everis.alicante.courses.becajava.garage.domain.Plaza;
 import com.everis.alicante.courses.becajava.garage.interfaces.ControladorGarage;
 
 public class GarageMain {
 
-	static ControladorGarage controlador;
 	static Garage garage;
+	static ControladorGarage controlador;
 	static String SEPARADOR = "*******************************************************************************";
+	
 	public static void main(String[] args) throws IOException {
 		
-		//inicializar los componentes de la aplicación
-		//4 clientes
-		//5 vehiculos
-		//30 plazas de garaje
-		//1garage
 		inicializarComponentes();
+		//iniciar aplicacion o listar menu
 		incializarAplicacion();
 		
 	}
@@ -36,7 +37,7 @@ public class GarageMain {
 				+ "\n2.Lista de Plazas Ocupadas."
 				+ "\n3.Calcular Ingresos."
 				+ "\n4.Reservar una Plaza."
-				+ "\n5.Reservar."
+				+ "\n5.Consultar Reservas."
 				+ "\n6.Listar Clientes."
 				+ "\n7.Listar Vehículo");
 		final Scanner in = new Scanner(System.in);
@@ -58,7 +59,7 @@ public class GarageMain {
 			
 			break;
 		case 4:
-			controlador.reserverPlaza();
+			resultado=controlador.reserverPlaza();
 			break;
 		case 5:
 			
@@ -85,12 +86,15 @@ public class GarageMain {
 	private static void inicializarComponentes() throws IOException {
 		
 		PlazaDAO plazaDao = new PlazaDAOFileImpl();
+		ReservaDAO reservaDao = new ReservaDAOFileImpl();
+		ClienteDAO clienteDao = new ClienteDAOFileImpl();
 		garage = new Garage();
 		
 		List<Plaza> plazasTemp = plazaDao.readPlazas();
 		
-		garage.setPlaza(plazasTemp);
-		controlador = new ControladorGarageConArrays();
+		garage.setPlazas(plazasTemp);
+		garage.setClientes(clienteDao.readClientes());
+		controlador = new ControladorGarageImpl();
 //		
 //		for (int i = 0; i < plazas.length; i++) {
 //			Plaza plazaTemp = new  Plaza();
@@ -126,7 +130,4 @@ public class GarageMain {
 		return garage;
 	}
 
-	public static void setGarage(Garage garage) {
-		GarageMain.garage = garage;
-	}
 }
