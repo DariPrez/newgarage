@@ -10,7 +10,7 @@ import java.util.TreeMap;
 import com.everis.alicante.courses.becajava.garage.domain.Vehiculo;
 import com.everis.alicante.courses.becajava.garage.dao.interfaces.VehiculoDAO;
 
-public class VehiculoDAOImpl implements VehiculoDAO {
+public class VehiculoDAOFileImpl implements VehiculoDAO {
 
 	@Override
 	public Map<String,Vehiculo> readVehiculos() throws IOException {

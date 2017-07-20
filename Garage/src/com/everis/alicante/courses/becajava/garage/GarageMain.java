@@ -59,16 +59,16 @@ public class GarageMain {
 			
 			break;
 		case 4:
-			resultado=controlador.reserverPlaza();
+			controlador.reserverPlaza();
 			break;
 		case 5:
 			
 			break;
 		case 6:
-			
+			controlador.listaCliente();
 			break;
 		case 7:
-			
+			controlador.listarVehiculos();
 			break;
 		}
 		if(option==4&&resultado) {

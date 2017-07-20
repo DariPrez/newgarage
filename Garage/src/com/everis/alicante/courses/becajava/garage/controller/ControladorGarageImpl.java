@@ -10,8 +10,12 @@ import java.util.Map;
 import java.util.Scanner;
 
 import com.everis.alicante.courses.becajava.garage.GarageMain;
+import com.everis.alicante.courses.becajava.garage.dao.impl.ClienteDAOFileImpl;
 import com.everis.alicante.courses.becajava.garage.dao.impl.ReservaDAOFileImpl;
+import com.everis.alicante.courses.becajava.garage.dao.impl.VehiculoDAOFileImpl;
+import com.everis.alicante.courses.becajava.garage.dao.interfaces.ClienteDAO;
 import com.everis.alicante.courses.becajava.garage.dao.interfaces.ReservaDAO;
+import com.everis.alicante.courses.becajava.garage.dao.interfaces.VehiculoDAO;
 import com.everis.alicante.courses.becajava.garage.domain.Camion;
 import com.everis.alicante.courses.becajava.garage.domain.Cliente;
 import com.everis.alicante.courses.becajava.garage.domain.Coche;
@@ -67,7 +71,7 @@ public class ControladorGarageImpl implements ControladorGarage {
 
 		Vehiculo vehiculo = null;
 		Cliente cliente = new Cliente();
-		ReservaDAO dao = new ReservaDAOFileImpl();
+		ReservaDAO daoReserva = new ReservaDAOFileImpl();
 
 		System.out.println("Ingrese Nif:");
 		Scanner in = new Scanner(System.in);
@@ -127,7 +131,7 @@ public class ControladorGarageImpl implements ControladorGarage {
 				reserva.setCliente(cliente);
 				reserva.setPlaza(plaza);
 				reserva.setFechaReserva(Calendar.getInstance().getTime());
-				dao.saveReserva(reserva);
+				daoReserva.saveReserva(reserva);
 
 				return hayplaza;
 			} else {
@@ -138,16 +142,35 @@ public class ControladorGarageImpl implements ControladorGarage {
 	}
 
 	@Override
-	public void listaCliente() {
-		Map<String, Cliente> clientes = GarageMain.getGarage().getClientes();
+	public void listaCliente() throws IOException {
+
+		ClienteDAO daoCliente = new ClienteDAOFileImpl();
+
+		Map<String, Cliente> clientes = daoCliente.readClientes();
 
 		Collection<Cliente> collection = clientes.values();
 
-		for (Iterator iterator = collection.iterator(); iterator.hasNext();) {
+		for (Iterator<Cliente> iterator = collection.iterator(); iterator.hasNext();) {
 			Cliente cliente = (Cliente) iterator.next();
 
-			System.out.println(cliente.getNombreCompleto());
+			System.out.println(cliente.getNombreCompleto() + ";" + cliente.getNif());
 
+		}
+	}
+
+	@Override
+	public void listarVehiculos() throws IOException {
+
+		VehiculoDAO daoVehiculo = new VehiculoDAOFileImpl();
+
+		Map<String, Vehiculo> vehiculos = daoVehiculo.readVehiculos();
+
+		Collection<Vehiculo> collection = vehiculos.values();
+
+		for (Iterator<Vehiculo> iterator = collection.iterator(); iterator.hasNext();) {
+			Vehiculo vehiculo = (Vehiculo) iterator.next();
+
+			System.out.println(vehiculo.getPlate() + ";" + vehiculo.getTipoVehiculo());
 		}
 	}
 }

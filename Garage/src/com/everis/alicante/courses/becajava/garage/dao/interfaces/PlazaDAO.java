@@ -12,4 +12,9 @@ public interface PlazaDAO {
 	
 	void write(Plaza[] plazas);
 	
+	Plaza readPlaza(int numeroPlaza) throws IOException;
+	
+	void deletePlaza(int numeroPlaza);
+	
+	//falta Update
 }

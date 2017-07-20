@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import com.everis.alicante.courses.becajava.garage.GarageMain;
+import com.everis.alicante.courses.becajava.garage.dao.interfaces.PlazaDAO;
 import com.everis.alicante.courses.becajava.garage.dao.interfaces.ReservaDAO;
 import com.everis.alicante.courses.becajava.garage.domain.Cliente;
 import com.everis.alicante.courses.becajava.garage.domain.Plaza;
@@ -38,6 +39,8 @@ public class ReservaDAOFileImpl implements ReservaDAO {
 	public Map<String, Reserva> readReservas() throws IOException {
 		
 		Map<String,Reserva> reservas = new TreeMap<String, Reserva>();
+		
+		PlazaDAO daoPlaza = new PlazaDAOFileImpl();
 		
 		String linea;
 		
