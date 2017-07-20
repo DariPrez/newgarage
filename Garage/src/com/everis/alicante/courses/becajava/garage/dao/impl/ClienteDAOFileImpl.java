@@ -33,7 +33,7 @@ public class ClienteDAOFileImpl implements ClienteDAO {
 					
 					clienteTemp.setNif(temp[0]);
 					clienteTemp.setNombreCompleto(temp[1]);
-					
+					//clienteTemp.setVehiculo(temp[2]);
 											
 					clientes.put(clienteTemp.getNif(),clienteTemp);
 				
@@ -49,6 +49,18 @@ public class ClienteDAOFileImpl implements ClienteDAO {
 	@Override
 	public void createCliente(Cliente cliente) {
 		
+		
+	}
+
+	@Override
+	public Cliente readCliente(String nif) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteCliente(String nif) {
+		// TODO Auto-generated method stub
 		
 	}
 

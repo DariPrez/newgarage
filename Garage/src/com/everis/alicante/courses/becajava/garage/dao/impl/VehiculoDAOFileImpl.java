@@ -51,4 +51,19 @@ public class VehiculoDAOFileImpl implements VehiculoDAO {
 		
 	}
 
+	
+	@Override
+	public Vehiculo readVehiculo(String plate) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteVehiculo(String plate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 }

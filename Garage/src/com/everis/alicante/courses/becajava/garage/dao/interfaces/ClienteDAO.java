@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import com.everis.alicante.courses.becajava.garage.domain.Cliente;
+import com.everis.alicante.courses.becajava.garage.domain.Plaza;
 
 public interface ClienteDAO {
 
@@ -11,5 +12,7 @@ public interface ClienteDAO {
 	 
 	 void createCliente(Cliente cliente);
 	
-	
+	 Cliente readCliente(String nif) throws IOException;
+		
+	 void deleteCliente(String nif);
 }

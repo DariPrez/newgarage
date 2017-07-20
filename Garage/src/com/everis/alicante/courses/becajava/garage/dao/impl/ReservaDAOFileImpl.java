@@ -13,8 +13,10 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import com.everis.alicante.courses.becajava.garage.GarageMain;
+import com.everis.alicante.courses.becajava.garage.dao.interfaces.ClienteDAO;
 import com.everis.alicante.courses.becajava.garage.dao.interfaces.PlazaDAO;
 import com.everis.alicante.courses.becajava.garage.dao.interfaces.ReservaDAO;
+import com.everis.alicante.courses.becajava.garage.dao.interfaces.VehiculoDAO;
 import com.everis.alicante.courses.becajava.garage.domain.Cliente;
 import com.everis.alicante.courses.becajava.garage.domain.Plaza;
 import com.everis.alicante.courses.becajava.garage.domain.Reserva;
@@ -41,6 +43,8 @@ public class ReservaDAOFileImpl implements ReservaDAO {
 		Map<String,Reserva> reservas = new TreeMap<String, Reserva>();
 		
 		PlazaDAO daoPlaza = new PlazaDAOFileImpl();
+		ClienteDAO daoCliente = new ClienteDAOFileImpl();
+		VehiculoDAO daoVehiculo = new VehiculoDAOFileImpl();
 		
 		String linea;
 		
@@ -57,11 +61,9 @@ public class ReservaDAOFileImpl implements ReservaDAO {
 				
 				reserva.setCodigoReserva(temp[0]);
 				
-				Plaza plaza = GarageMain.getGarage().getPlazas().get(Integer.parseInt(temp[1]));
+				reserva.setPlaza(daoPlaza.readPlaza(Integer.parseInt(temp[1])));
 				
-				reserva.setPlaza(plaza);
-				
-				reserva.setCliente(GarageMain.getGarage().getClientes().get(temp[2]));
+				reserva.setCliente(daoCliente.readCliente(temp[2]));
 				
 				reserva.getCliente().setVehiculo(GarageMain.getGarage().getVehiculos().get(temp[3]));
 				
